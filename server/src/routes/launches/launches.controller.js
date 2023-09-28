@@ -8,7 +8,7 @@ const {
 function httpGetAllTheLaunches(req, res) {
   return res.status(200).json(getAllTheLaunches());
 }
-
+function test() {}
 function httpAddNewLaunch(req, res) {
   //get the data from post method which is passing through the body
   const launch = req.body;
