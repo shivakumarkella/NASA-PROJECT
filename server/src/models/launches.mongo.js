@@ -22,7 +22,7 @@ const launchesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  upComing: {
+  upcoming: {
     type: Boolean,
     required: true,
   },
