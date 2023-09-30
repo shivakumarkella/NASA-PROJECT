@@ -1,15 +1,16 @@
 const {
   getAllTheLaunches,
-  addNewLaunch,
+  //addNewLaunch,
   abortLaunchByID,
   existsLaunchWithId,
+  scheduleNewLaunch,
 } = require("../../models/launches.model");
 
-function httpGetAllTheLaunches(req, res) {
-  return res.status(200).json(getAllTheLaunches());
+async function httpGetAllTheLaunches(req, res) {
+  return res.status(200).json(await getAllTheLaunches());
 }
 
-function httpAddNewLaunch(req, res) {
+async function httpAddNewLaunch(req, res) {
   //get the data from post method which is passing through the body
   const launch = req.body;
 
@@ -31,8 +32,10 @@ function httpAddNewLaunch(req, res) {
       Error: "Invalid Launch Date",
     });
   }
-
-  addNewLaunch(launch);
+  //InMemory
+  //addNewLaunch(launch);
+  //MongoDb
+  await scheduleNewLaunch(launch);
   res.status(201).json(launch);
 }
 
