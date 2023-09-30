@@ -56,17 +56,21 @@ function loadPlanetsData() {
 }
 
 async function savePlanet(planet) {
-  await planets.updateOne(
-    {
-      keplerName: planet.kepler_name,
-    },
-    {
-      keplerName: planet.kepler_name,
-    },
-    {
-      upsert: true,
-    }
-  );
+  try {
+    await planets.updateOne(
+      {
+        keplerName: planet.kepler_name,
+      },
+      {
+        keplerName: planet.kepler_name,
+      },
+      {
+        upsert: true,
+      }
+    );
+  } catch (error) {
+    console.error(`it seems Planet not saved ${error}`);
+  }
 }
 
 async function getAllThePlanets() {
