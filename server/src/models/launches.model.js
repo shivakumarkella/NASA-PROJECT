@@ -16,8 +16,11 @@ async function getLatestFlightNumber() {
 
   return latestLaunch.flightNumber;
 }
-function existsLaunchWithId(launchId) {
-  return launches.has(launchId);
+
+async function existsLaunchWithId(launchId) {
+  //inMemory
+  //return launches.has(launchId);
+  return await launches.findOne({ flightNumber: launchId });
 }
 
 const launch = {
@@ -90,10 +93,20 @@ async function scheduleNewLaunch(launch) {
   await saveLaunches(newLaunch);
 }
 
-function abortLaunchByID(launchId) {
-  const aborted = launches.get(launchId);
-  aborted.upcoming = false;
-  aborted.success = false;
+async function abortLaunchByID(launchId) {
+  //inMemory
+  // const aborted = launches.get(launchId);
+  // aborted.upcoming = false;
+  // aborted.success = false;
+  //MongoDb
+  const aborted = await launches.updateOne(
+    { flightNumber: launchId },
+    {
+      upcoming: false,
+      success: false,
+    }
+  );
+  return aborted.acknowledged == true && aborted.modifiedCount == 1;
 }
 
 module.exports = {
