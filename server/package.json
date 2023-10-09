@@ -6,6 +6,7 @@
   "scripts": {
     "watch": "set Port=5000 && nodemon src/server.js",
     "test": "jest",
+    "test-watch": "jest --watch",
     "start": "set Port=5000 && node src/server.js",
     "start-cluster": "set Port=5000 && pm2 start node src/server.js -i max",
     "stop-cluster": "pm2 stop server"
@@ -13,6 +14,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parse": "^5.5.0",
