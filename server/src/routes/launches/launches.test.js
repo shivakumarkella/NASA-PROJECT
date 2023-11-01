@@ -14,7 +14,7 @@ describe("Test Launches Api", () => {
   describe("Test GET /Launches", () => {
     test("it should respond with 200 status code", async () => {
       const response = await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-Type", /json/)
         .expect(200);
       // expect(response.statusCode).toBe(200);
@@ -42,7 +42,7 @@ describe("Test Launches Api", () => {
     };
     test("it should respond with 201 status code", async () => {
       const response = await request(app)
-        .post("/Launches")
+        .post("/v1/Launches")
         .send(completeLaunchData)
         .expect("Content-Type", /json/)
         .expect(201);
@@ -55,7 +55,7 @@ describe("Test Launches Api", () => {
 
     test("it should catch missing requied properties", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(completeLaunchDataWithoutDate)
         .expect("Content-Type", /json/)
         .expect(400);
@@ -66,7 +66,7 @@ describe("Test Launches Api", () => {
 
     test("it should catch invalid dates", async () => {
       const response = await request(app)
-        .post("/Launches")
+        .post("/v1/Launches")
         .send(completeLaunchDataWithInvalidDate)
         .expect("Content-Type", /json/)
         .expect(400);

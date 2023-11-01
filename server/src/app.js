@@ -4,12 +4,8 @@ const cors = require("cors");
 const path = require("path");
 //Logging
 const morgan = require("morgan");
-
-//get the launches router
-const launchesRouter = require("./routes/launches/launches.router");
-
-//adding the planets router middleware
-const planetsRouter = require("./routes/planets/planets.router");
+//Get Api
+const api = require("./routes/api");
 
 //Create the express middleware
 const app = express();
@@ -26,10 +22,8 @@ app.use(
 app.use(express.json());
 //let us serve the react optimized code through node server port by creating a middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
+app.use("/v1", api);
 
-//adding the router middleware
-app.use("/planets", planetsRouter);
-app.use("/launches", launchesRouter);
 //adding the homepage router which is a get request "/"
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));

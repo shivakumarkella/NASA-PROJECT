@@ -1,5 +1,5 @@
 //All the APIs are hosted in local environment , so lets save it
-const API_URL = "http://localhost:5000";
+const API_URL = "http://localhost:5000/v1";
 
 async function httpGetPlanets() {
   // Load planets and return as JSON.
